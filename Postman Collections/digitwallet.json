@@ -1264,6 +1264,47 @@
           "response": []
         }
       ]
+    },
+    {
+      "_postman_id": "8705d9f8-ebd3-4117-aed9-50c2e7ec7aeb",
+      "name": "db:init",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "384767a2-f29c-48eb-8d4b-7a1054782efa",
+            "type": "text/javascript",
+            "exec": [
+              "var jsonData = JSON.parse(responseBody);",
+              "pm.environment.set(\"registerToken\", jsonData.token);",
+              "",
+              "pm.test(\"response is ok\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"response data valid\",()=>{",
+              "    pm.response.to.have.jsonBody(\"cellphone\");",
+              "    pm.response.to.have.jsonBody('token');",
+              "})",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\"cellphone\":\"8611111111\",\n\"password\":\"pwd11111\"\n}"
+        },
+        "url": "{{base_url}}/api/users/register"
+      },
+      "response": []
     }
   ],
   "event": [
