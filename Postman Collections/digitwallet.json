@@ -1,0 +1,1291 @@
+{
+  "info": {
+    "_postman_id": "108df158-6419-41f5-9910-75ab1e3586a1",
+    "name": "digitwallet",
+    "description": "# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\n\tUNAUTHORIZED: 401,\n    NO_FOUND: 404,\n    TOKEN_EXPIRED: 405,\n    TEMP_PASSWORD_EXPIRED: 406,\n    VERIFICATION_CODE_EXPIRED: 407,\n    UNVERIFIED_USER: 408,\n    INVALID_CBU: 410,\n    INVALID_CUIT: 411,\n    INVALID_ACCOUNT_NAME:412,\n    ACCOUNT_UPDATED_ERROR:413,\n    CANCEL_TRAN_ERROR:414,\n    INVALID_INPUT_DATA: 420,\n    INVALID_CREDENTIAL: 421,\n    INVALID_PHONE: 422,\n    INVALID_EMAIL: 423,\n    INVALID_PASSWORD: 424,\n    INVALID_VERIFICATION_CODE: 425,\n    INVALID_TOKEN: 426,\n    CRYPTOCCY_ADDR_POOL_EXHAUSTED:430,\n    USER_LOCKED_DISABLED: 440,\n    USER_NOT_EXIST: 441,\n    USER_EXIST:443,\n    ACCOUNT_NOT_EXIST:442,\n    EMAIL_NOT_EXIST: 450,\n    DUPLIATE_FIELDS: 471,\n    INSUFFICIENT_BALANCE: 480,\n    SERVER_ERROR: 500,\n    WALLET_TRANS_SIGN_REQUIRED:600",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "_postman_id": "d50d2a7f-a858-4cf0-8035-7318fcd193b0",
+      "name": "apis for user",
+      "description": "this is apis set for mobile application",
+      "item": [
+        {
+          "_postman_id": "fa29c1a2-0aa5-453e-bcd4-fdd9e0099db3",
+          "name": "/api/users/register",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "637d557d-b405-4eb3-9895-185f45011a88",
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"registerToken\", jsonData.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\"cellphone\":\"8618033440503\",\n\"password\":\"pwd11111\"\n}"
+            },
+            "url": "{{base_url}}/api/users/register",
+            "description": "This method is used to register a new user. On successful registration, the system returns a JSON Web Token (JWT) to be used for Authorization in subsequent requests.\n\n###### Query Param\n\nNONE\n\n###### Query String\n\nNONE\n\n###### headers\n\n|key\t|Type\t|Description|\n| ---|---| ---|\n|Content-Type|string (required)| application/json|\n\n\n###### Body\n\n|Name\t|Type\t|Description|\n| ---|---| ---|\n|email\t|string (required)| user email address (one of \"email\" or \"cellphone\" is required)|\n|cellphone|string (required) |user's phone ((one of \"email\" or \"cellphone\" is required)|\n|password|string (required)| |\n\n###### Returns\n* success:status code `200` with\n\n|field|description|\n|---|---|\n|token|the jwt token will be passed on on the confirm code api|\n|cellphone| user's register cellphone if input is phone|\n|email|user's register email if input is email|\n\n* failure: status code `400` with an error object"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9560a5a9-390f-4516-9f1e-9f8ee0d5ca70",
+          "name": "/api/users/register/confirmcode",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{registerToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"code\":\"858399\"}"
+            },
+            "url": "http://localhost:3000/api/users/register/confirmcode"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "4e86c4bd-98e3-4e5e-878d-83d60a58e9ae",
+          "name": "/api/users/password/reset/code",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "e45fc89b-e4c6-46ef-98c5-5f46bfbfaf70",
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"passResetToken\", jsonData.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"cellphone\":\"8618033440503\"}"
+            },
+            "url": "http://localhost:3000/api/users/password/reset/code"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "95709d4f-696c-4cd8-8a2a-4bdcb0a44c7e",
+          "name": "/api/users/password/reset/temp",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{passResetToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"code\":\"932356\"}"
+            },
+            "url": "http://localhost:3000/api/users/password/reset/temp"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "ba7c50d0-2969-462d-8129-cb52e023e85b",
+          "name": "/api/users/password/reset",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"cellphone\":\"8618033440503\",\n  \"temp_password\":\"YrBo9iK5tv\",\n  \"new_password\":\"pwd11111\"\n}"
+            },
+            "url": "http://localhost:3000/api/users/password/reset"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "becb0620-0d08-427f-aadc-e5b41e0983a9",
+          "name": "/api/users/auth",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "cec97cb9-49e6-4b86-b2ed-f8f29dfe7067",
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"authToken\", jsonData.token);",
+                  "pm.test('ok',()=>{",
+                  "     pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n      \"cellphone\":\"8618033440503\",\n      \"password\":\"pwd11111\"\n      }"
+            },
+            "url": "http://localhost:3000/api/users/auth"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "1c4727a9-a0b8-4798-82ee-d9b33b7f746d",
+          "name": "/api/users/auth/confirm",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "4ea1bb2b-96a3-4a21-b9e2-adb32b46edf3",
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"authToken\", jsonData.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n      \"cellphone\":\"8618033440503\",\n      \"code\":\"218837\"\n      }"
+            },
+            "url": "http://localhost:3000/api/users/auth/confirm"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "059c2f3a-9980-4adb-ac8b-6ef98aa3236b",
+          "name": "/api/users/query",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {},
+            "url": "http://localhost:3000/api/users/query"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9575c896-b632-42d1-8703-8edd5de3436b",
+          "name": "/api/users/update",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n      \"email\":\"shubin1211@outlook.com\",\n      \"cellphone\":\"8618033440503\"\n      }"
+            },
+            "url": "http://localhost:3000/api/users/update"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "338687b2-1838-4dc0-bc46-45d509e2beb6",
+          "name": "/api/users/phonemail/verify",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\":\"212389\"\n}"
+            },
+            "url": "http://localhost:3000/api/users/phonemail/verify"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d3307211-061f-4807-a4c2-1fce2d0a2563",
+          "name": "/api/users/id/photos",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"photos\": [\n        {\n            \"encrypted_photo\": \"google\",\n            \"type\": \"ID_FRONT\"\n        },\n        {\n            \"encrypted_photo\": \"ss sf \",\n            \"type\": \"ID_BACK\"\n        },\n        {\n            \"encrypted_photo\": \"did \",\n            \"type\": \"RESIDENCE\"\n        }\n    ],\n    \"pgp_key_id\": 1\n}"
+            },
+            "url": "http://localhost:3000/api/users/id/photos"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "547e0f91-41f6-4180-b917-b9184af25ce5",
+          "name": "/api/pgp/pubkey",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[{\n  \"encrypted_photo\":\"\",\n  \"type\":\"ID_FRONT\"\n},\n{\n  \"encrypted_photo\":\"\",\n  \"type\":\"ID_FRONT\"\n}\n]"
+            },
+            "url": "http://localhost:3000/api/pgp/pubkey"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "ff649036-edf3-48a5-b459-980984a9c352",
+          "name": "/api/bank/query",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\":130,\n  \"account_name\":\"Primary ARS\",\n  \"is_default\":true\n}"
+            },
+            "url": "http://localhost:3000/api/bank/query"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "8675a1c8-9ab8-46fb-a743-1112dff3dd35",
+          "name": "/api/bank/create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currency\":\"ARS\",\n  \"cbu\":\"1234567890123456789080\",\n  \"bank_branch\":\"cbd\",\n  \"account_number\":\"2947281923\",\n  \"account_name\":\"yuqing\",\n  \"branch_office\":\"shenzen\"\n}"
+            },
+            "url": "http://localhost:3000/api/bank/create"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a7069cce-740d-4643-9e4b-f2f462e06281",
+          "name": "/api/bank/update",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bank_id\":9,\n  \"cbu\":\"1234567890123456789082\",\n  \"bank_branch\":\"cbd test\",\n  \"account_number\":\"2947281923\",\n  \"account_name\":\"shubin\",\n  \"branch_office\":\"shenzen\"\n}"
+            },
+            "url": "http://localhost:3000/api/bank/update"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "29209272-b18c-404c-99c8-81d759fbace6",
+          "name": "/api/bank/remove",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bank_id\":8\n}"
+            },
+            "url": "http://localhost:3000/api/bank/remove"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9d34e914-3f42-4531-a27e-93ac2562244a",
+          "name": "/api/account/query",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "fdbf06ea-d568-43d7-93d8-91aaf63f0d27",
+                "type": "text/javascript",
+                "exec": [
+                  "console.log(",
+                  "pm.environment.get(\"authToken\"));",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {},
+            "url": "http://localhost:3000/api/account/query"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "f5bb5bbb-d770-4a4b-be91-44502257ed8e",
+          "name": "/api/account/create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_name\":\"Primary ZEC\",\n  \"currency\":\"ZEC\",\n  \"is_default\":true\n}"
+            },
+            "url": "http://localhost:3000/api/account/create"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "8c433598-92d1-4e6c-98e4-a2f5a727c3bc",
+          "name": "/api/account/update",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\":161,\n  \"account_name\":\"Primary ARS 02\",\n  \"is_default\":true\n}"
+            },
+            "url": "http://localhost:3000/api/account/update"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "827f3ef8-7907-4fe2-a862-f96c4a79425c",
+          "name": "/api/trans/withdrawal ARS",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n  \"amount\":30,\n  \"account_id\":159,\n  \"bank_id\":10\n}"
+            },
+            "url": "http://localhost:3000/api/trans/withdrawal"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "ea6d93ba-5ee5-47ef-b050-1ba8d3a381ef",
+          "name": "/api/trans/withdrawal",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "a0246786-fff4-4168-ad96-bba884c96ff8",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n  \"amount\":10000,\n  \"feerate\":6000,\n  \"address\":\"t2DR7oLV8NR5P99T2y8PVFXVUDirCFnoMKU\",\n  \"account_id\":166\n}"
+            },
+            "url": "http://localhost:3000/api/trans/withdrawal"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "6403e305-cab9-4aaf-b32a-add192166807",
+          "name": "/api/trans/withdrawal/confirmcode",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"492564\",\n  \"tick\":15227342003500169\n}"
+            },
+            "url": "http://localhost:3000/api/trans/withdrawal/confirmcode"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "5cf19b93-86cc-4786-a041-e2182f21d6ca",
+          "name": "/api/trans/deposit/<fiat>",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "a0246786-fff4-4168-ad96-bba884c96ff8",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n  \"network\":\"Banelco\",\n  \"currency\":\"ARS\",\n  \"account_id\":159,\n  \"bank_id\":10,\n  \"amount\":100\n}"
+            },
+            "url": "http://localhost:3000/api/trans/deposit/fiat"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "2cadffb8-a104-4072-996a-61d13b573de1",
+          "name": "/api/trans/deposit/<fiat> -- cancel",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "a0246786-fff4-4168-ad96-bba884c96ff8",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n  \"transaction_id\":\"15218819107070896\"\n}"
+            },
+            "url": "http://localhost:3000/api/trans/deposit/fiat"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a4a3e9db-3495-4964-a9fd-b147c0c71c6f",
+          "name": "/api/trans/invoice",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\":\"2N4qsrN2AtAmcJwbCFt6VMvYRf2nvnCE411\",\n  \"amount\":10000,\n  \"currency\":\"BTC\"\n}"
+            },
+            "url": "http://localhost:3000/api/trans/invoice"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c50e951e-e6c0-4dc9-a550-00faec781a3e",
+          "name": "/api/trans/query?type=deposit&from=20170102&to=20170102",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "http://localhost:3000/api/trans/query?type=all&from=20170102",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "trans",
+                "query"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "all",
+                  "equals": true
+                },
+                {
+                  "key": "from",
+                  "value": "20170102",
+                  "equals": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a2277820-3bd1-40c2-903f-7a535330a5f4",
+          "name": "/api/trans/query?type=withdrawal",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "http://localhost:3000/api/trans/query?type=withdrawal",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "trans",
+                "query"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "withdrawal",
+                  "equals": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e319ea10-e168-47ce-a309-3124cca17d0b",
+          "name": "/api/ccy/<btc|eth...>/address/generate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\":166,\n  \"force_new\":true\n}"
+            },
+            "url": "http://localhost:3000/api/ccy/address/generate"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "00e231a3-0b63-454f-8709-48988fb5fc57",
+          "name": "/api/ccy/<btc|eth..>/tx/<address>",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\":122\n}"
+            },
+            "url": "http://localhost:3000/api/ccy/zec/tx/t2NzuQxzgQnbHZ5CPU4bjfJ36jvqDYhN1XN"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9b2d8593-2eaf-434e-8b1e-0b4db85ca449",
+          "name": "/api/exchange/query",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"account_from\":122,\n\t\"account_to\":123,\n\t\"amount\":100,\n\t\"type\":\"BUY\"\n}"
+            },
+            "url": "http://localhost:3000/api/exchange/query",
+            "description": "query params: \n [from] | [to] |[currency_from]|[currency_to] |[type]"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e5c7efd7-5941-4529-9ce9-690227ea0062",
+          "name": "/api/exchange/create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_from\":158,\n  \"account_to\":157,\n  \"amount_from\":100\n}"
+            },
+            "url": "http://localhost:3000/api/exchange/create"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "3118492f-7932-47e1-bffd-1be082292b19",
+          "name": "/api/exchange/liverate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currency_from\":\"USD\",\n  \"currency_to\":\"BTC\"\n  \n}"
+            },
+            "url": "http://localhost:3000/api/exchange/liverate"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "b5d324a8-30f1-4c2c-8f2f-dd7043375a99",
+          "name": "/api/settings/query",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"account_from\":122,\n\t\"account_to\":123,\n\t\"amount\":100,\n\t\"type\":\"BUY\"\n}"
+            },
+            "url": "http://localhost:3000/api/settings/query",
+            "description": "query params: \n [from] | [to] |[currency_from]|[currency_to] |[type]"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "02f5ff74-1886-428b-883c-360df07a7ad7",
+          "name": "/api/settings/tfa/change/request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"method\":\"DISABLE\",\n  \"usage\":\"Login\"\n}"
+            },
+            "url": "http://localhost:3000/api/settings/tfa/change/request"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c0c26e7c-3206-44af-942d-3f3c931f743c",
+          "name": "/api/settings/tfa/change/confirm",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"code\":\"389958\",\n\t\"usage\":\"Login\"\n}"
+            },
+            "url": "http://localhost:3000/api/settings/tfa/change/confirm"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "1ce7b4f6-6ca6-480d-8ac3-60596eeed55d",
+          "name": "/api/settings/tfa/query",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"method\":\"TOTP_APP\",\n\t\"scope\":\"Withdraw\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/settings/tfa/query?usage=Login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "settings",
+                "tfa",
+                "query"
+              ],
+              "query": [
+                {
+                  "key": "usage",
+                  "value": "Login",
+                  "equals": true
+                }
+              ]
+            },
+            "description": "query params: \n [from] | [to] |[currency_from]|[currency_to] |[type]"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "2f1d7134-faaa-4be2-b9e1-14cefb5f05b1",
+      "name": "apis for atm",
+      "description": "this is apis set for third party application to deposit balance into user's account",
+      "item": [
+        {
+          "_postman_id": "6b3de567-60e9-42f9-977e-adaffb873a2d",
+          "name": "/api/gateway/deposit/code",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "64fa540b-f194-4dbe-9cda-a85ad8dafcd8",
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "c3026fb7-c52c-4379-9e72-3ae0cd060a98",
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"deposit_auth_code\", jsonData.authorization_code);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{     \"cellphone\":\"8615818715332\",\n      \"last3Id\":\"318\",\n      \"api_key\":\"demo_key\",\n      \"api_secret\":\"demo_secret\"\n}"
+            },
+            "url": "http://localhost:3002/api/gateway/deposit/code"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "36a77d0f-3d8d-4523-896b-8ae4d93a8ee6",
+          "name": "/api/gateway/deposit",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{deposit_auth_code}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"amount\":120\n}"
+            },
+            "url": "http://localhost:3002/api/gateway/deposit"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e2c57ba1-f3d6-4328-b75a-8f513da7aca9",
+          "name": "/api/gateway/deposit/query",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{deposit_auth_code}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"amount\":18.88\n}"
+            },
+            "url": "http://localhost:3002/api/gateway/deposit/query"
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "b4c33e14-a369-4e32-8bfb-a6c5e5442fea",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "1e8901e1-8873-494d-8574-0455f56388d5",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "_postman_id": "3c2ade7b-4932-4706-a621-468c420758e4",
+      "name": "apis for exchange",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "da0e61bc-e5cf-4d53-8a81-15c350b6b0d0",
+          "name": "/api/exchange/orders/create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{exchange_auth}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n  \"amount\":50000,\n  \"currency_from\":\"USD\",\n  \"currency_to\":\"BTC\",\n  \"rate\":1000\n}"
+            },
+            "url": "http://localhost:3005/api/exchange/orders/create",
+            "description": "request data:\ntype:\"BUY\"|\"SELL\""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "6366f6fe-c344-47d9-ad67-6b8f33bf595c",
+          "name": "/api/exchange/auth",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "83d80559-7e27-4b87-b1a6-8b58d89d7023",
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"exchange_auth\", jsonData.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"app_key\":\"shubin\",\n\"app_pass\":\"huang2\"\n}"
+            },
+            "url": "http://localhost:3005/api/auth"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a496d134-fe42-437c-9f43-4117890faec5",
+          "name": "/api/exchange/orders/cancel",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{exchange_auth}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n  \"order_id\":9\n}"
+            },
+            "url": "http://localhost:3005/api/exchange/orders/cancel"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "59a6efc7-af3d-49ab-a753-82eb77015db0",
+          "name": "/api/exchange/orders/query",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{exchange_auth}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n\t\"amount\":100,\n\t\"currency_from\":\"USD\",\n\t\"currency_to\":\"BTC\",\n\t\"rate\":10000\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3005/api/exchange/orders/query?from=20170102&type=SELL",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3005",
+              "path": [
+                "api",
+                "exchange",
+                "orders",
+                "query"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "20170102",
+                  "equals": true
+                },
+                {
+                  "key": "type",
+                  "value": "SELL",
+                  "equals": true
+                }
+              ]
+            },
+            "description": "query params: \n [from] | [to] |[currency_from]|[currency_to] |[type]"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "34c9fae0-ce33-482f-8491-f90199d44489",
+          "name": "/api/ws/auth",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "83d80559-7e27-4b87-b1a6-8b58d89d7023",
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"exchange_auth\", jsonData.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"app_key\":\"ws\",\n\"app_pass\":\"shubin\"\n}"
+            },
+            "url": "http://localhost:3005/api/ws/auth"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "d120c9dd-3c82-4dca-a859-83e031a6464a",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "7228f2c1-9be1-43d0-8ead-c59676ffd082",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
