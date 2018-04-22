@@ -978,6 +978,29 @@
             "description": "query params: \n [from] | [to] |[currency_from]|[currency_to] |[type]"
           },
           "response": []
+        },
+        {
+          "_postman_id": "dc6ea690-23d6-4459-a838-8be7e9ee3f9a",
+          "name": "/api/users/register/confirmcode Copy",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{registerToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"code\":\"858399\"}"
+            },
+            "url": "http://localhost:3000/api/users/register/confirmcode"
+          },
+          "response": []
         }
       ]
     },
