@@ -978,6 +978,38 @@
             "description": "query params: \n [from] | [to] |[currency_from]|[currency_to] |[type]"
           },
           "response": []
+        },
+        {
+          "_postman_id": "32d3bd3f-df99-48b8-8047-62c5f2b47120",
+          "name": "/api/users/password/reset/code Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "e45fc89b-e4c6-46ef-98c5-5f46bfbfaf70",
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"passResetToken\", jsonData.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"cellphone\":\"8618043440503\"}"
+            },
+            "url": "http://localhost:3000/api/users/password/reset/code"
+          },
+          "response": []
         }
       ]
     },
