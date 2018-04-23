@@ -1049,14 +1049,6 @@
         "id": "2486d8e7-da09-49fb-b09d-28ee59d63436",
         "type": "text/javascript",
         "exec": [
-          "let baseUrl=pm.environment.get(\"base_url\");",
-          "if(!baseUrl||!baseUrl.endsWith('3400'))",
-          "{",
-          "    postman.setNextRequest(null);",
-          "   throw new Error('invalid url (port not start with 3400)');",
-          "} ",
-          "",
-          "",
           ""
         ]
       }
