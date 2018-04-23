@@ -955,12 +955,10 @@
               "raw": "{\n\t\"method\":\"TOTP_APP\",\n\t\"scope\":\"Withdraw\"\n}"
             },
             "url": {
-              "raw": "http://localhost:3000/api/settings/tfa/query?usage=Login",
-              "protocol": "http",
+              "raw": "{{base_url}}/api/settings/tfa/query?usage=Login",
               "host": [
-                "localhost"
+                "{{base_url}}"
               ],
-              "port": "3000",
               "path": [
                 "api",
                 "settings",
