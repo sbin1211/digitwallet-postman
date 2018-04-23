@@ -972,6 +972,38 @@
             "description": "query params: \n [from] | [to] |[currency_from]|[currency_to] |[type]"
           },
           "response": []
+        },
+        {
+          "_postman_id": "85190470-647f-4cd1-b21c-6b597200075b",
+          "name": "/api/users/auth/confirm Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "4ea1bb2b-96a3-4a21-b9e2-adb32b46edf3",
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"authToken\", jsonData.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n      \"cellphone\":\"8618033440503\",\n      \"code\":\"218837\"\n      }"
+            },
+            "url": "{{base_url}}/api/users/auth/confirm"
+          },
+          "response": []
         }
       ]
     },
