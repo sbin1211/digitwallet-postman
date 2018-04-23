@@ -137,7 +137,7 @@
               "mode": "raw",
               "raw": "{\"cellphone\":\"8618033440503\",\n  \"temp_password\":\"YrBo9iK5tv\",\n  \"new_password\":\"pwd11111\"\n}"
             },
-            "url": "http://localhost:3000/api/users/password/reset"
+            "url": "{{base_url}}/api/users/password/reset"
           },
           "response": []
         },
