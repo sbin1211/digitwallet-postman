@@ -17,7 +17,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "69b2593b-0a40-4d43-995e-ddfe907c223c",
+                "id": "c502dd73-7d63-4ef6-8c9f-02424089b7f7",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"postman env setup and api port start with 3400\",  () =>{",
@@ -25,7 +25,6 @@
                   "if(!baseUrl||!baseUrl.endsWith('3400'))",
                   "{",
                   "    postman.setNextRequest(null);",
-                  "   throw new Error('invalid url (port not start with 3400)');",
                   "} ",
                   "",
                   "",
