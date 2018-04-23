@@ -1,0 +1,1031 @@
+{
+  "info": {
+    "_postman_id": "0cf9d81a-37b1-42b0-9308-7b0a9ba69579",
+    "name": "digitwallet-tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "_postman_id": "2420551d-b2ea-43bf-a099-7a9d1c503fbb",
+      "name": "init",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "6c87a06a-9fdc-4917-b86e-947e806925ee",
+          "name": "db:init",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "5a2773aa-d00f-476d-b169-2d6725136868",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"db reset success\",  () =>{",
+                  "    let code = pm.response.code;",
+                  "    if(code!=200)",
+                  "    {",
+                  "        postman.setNextRequest(null);",
+                  "    }",
+                  "    pm.response.to.have.status(200);",
+                  "    ",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "{{base_url}}/api/test/resetdb"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "66807fe1-2ce8-44a3-8d9a-43214e0d2e62",
+      "name": "apis for user",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "ea02e086-3904-4bf6-bfeb-31804574950a",
+          "name": "auth",
+          "description": "",
+          "item": [
+            {
+              "_postman_id": "bc9b8e4a-343d-418d-882e-a1b6be19027b",
+              "name": "login:failure (password wrong)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "349acc01-c1e7-417e-81bb-2a71545ce6d9",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"response is 400\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"error_text\",\"login name or password wrong\");",
+                      "    pm.response.to.have.jsonBody('error_code');",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n      \"cellphone\":\"8690000000000\",\n      \"password\":\"pwdwrong111\"\n      }"
+                },
+                "url": "{{base_url}}/api/users/auth"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "90180b05-db60-4874-88b4-9615ecd68011",
+              "name": "login:failure (user disabled)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "a11ac03f-8767-4769-b509-783a939f13e0",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"response is 400\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"error_text\",\"user disabled\");",
+                      "    pm.response.to.have.jsonBody('error_code');",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n      \"cellphone\":\"8670000000000\",\n      \"password\":\"pwd000000\"\n      }"
+                },
+                "url": "{{base_url}}/api/users/auth"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "9ff2304f-5e25-4806-bd8b-4c903b304e02",
+              "name": "login:failure (user locked)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "3aa486db-903e-4753-8e88-f4df0ad3d451",
+                    "type": "text/javascript",
+                    "exec": [
+                      "console.log('requeist');",
+                      "pm.test(\"response is 400\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"error_text\",\"user is locked\");",
+                      "    pm.response.to.have.jsonBody('error_code');",
+                      "})",
+                      ""
+                    ]
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "8758d652-aa43-4228-ad58-09348901e10b",
+                    "type": "text/javascript",
+                    "exec": [
+                      "let url=pm.environment.get(\"base_url\");",
+                      "url=url+'/api/users/auth';",
+                      "",
+                      "const postRequest = {",
+                      "  url,",
+                      "  method: 'POST',",
+                      "  header: 'Content-Type:application/json',",
+                      "  body: {",
+                      "    mode: 'raw',",
+                      "    raw: JSON.stringify({",
+                      "        cellphone: '8660000000000',",
+                      "        password:'pwdwrong#111'",
+                      "    })",
+                      "  }",
+                      "};",
+                      "",
+                      "let i=3;",
+                      "const cbRequest=(err,res)=>{",
+                      "    if(i>=0)",
+                      "    {",
+                      "    i--;",
+                      "     pm.sendRequest(postRequest,cbRequest); ",
+                      "    }",
+                      "   ",
+                      "};",
+                      "",
+                      "pm.sendRequest(postRequest, cbRequest);",
+                      "",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n      \"cellphone\":\"8660000000000\",\n      \"password\":\"pwd000000\"\n      }"
+                },
+                "url": "{{base_url}}/api/users/auth"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "f9eaaeb9-ee55-46b8-8fe4-03a31de5a8ae",
+              "name": "login:cellphone",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "889e193a-6a7a-49ca-aafa-8171b2df579e",
+                    "type": "text/javascript",
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);",
+                      "pm.environment.set(\"authToken\", jsonData.token);",
+                      "pm.test(\"response is ok\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"token\");",
+                      "    pm.response.to.have.jsonBody('expired_at');",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n      \"cellphone\":\"8690000000000\",\n      \"password\":\"pwd000000\"\n      }"
+                },
+                "url": "{{base_url}}/api/users/auth"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "ae331e86-9f7c-44ec-82e8-5a0092c7516d",
+              "name": "login:email",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "889e193a-6a7a-49ca-aafa-8171b2df579e",
+                    "type": "text/javascript",
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);",
+                      "pm.environment.set(\"authToken\", jsonData.token);",
+                      "pm.test(\"response is ok\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"token\");",
+                      "    pm.response.to.have.jsonBody('expired_at');",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n      \"email\":\"test_exist@test.com\",\n      \"password\":\"pwd000000\"\n      }"
+                },
+                "url": "{{base_url}}/api/users/auth"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "8c52e279-0c55-4997-9f92-b985e3004414",
+              "name": "login:phone with tfa",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "634d3e5f-4443-4bf4-8f56-9a6d02f94163",
+                    "type": "text/javascript",
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);",
+                      "pm.environment.set(\"authToken\", jsonData.token);",
+                      "pm.test(\"response is ok\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"code_verify\",true);",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n      \"cellphone\":\"8650000000000\",\n      \"password\":\"pwd000000\"\n      }"
+                },
+                "url": "{{base_url}}/api/users/auth"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "eb9fcf32-b4bf-4411-9fe9-a0f3e5fe2024",
+              "name": "login:confirmcode",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "bb2490b5-cf83-43ba-b214-7f927511af08",
+                    "type": "text/javascript",
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);",
+                      "pm.environment.set(\"authToken\", jsonData.token);",
+                      "pm.test(\"response is ok\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"token\");",
+                      "    pm.response.to.have.jsonBody('expired_at');",
+                      "});",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n      \"cellphone\":\"8650000000000\",\n      \"code\":\"000000\"\n      }"
+                },
+                "url": "{{base_url}}/api/users/auth/confirm"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "7053321e-b7e3-4c84-9bb0-e460070b4071",
+              "name": "login:confirmcode (code used)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "9f157399-abba-4a2f-9ea7-4779511173e4",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"response is 400\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "pm.test(\"response is error object\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"error_code\");",
+                      "    pm.response.to.have.jsonBody(\"error_text\",\"code invalid or expired\");",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n      \"cellphone\":\"8650000000000\",\n      \"code\":\"000000\"\n      }"
+                },
+                "url": "{{base_url}}/api/users/auth/confirm"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "bfb59918-0429-4ebc-884a-926c1568c343",
+              "name": "register:cellphone",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "384767a2-f29c-48eb-8d4b-7a1054782efa",
+                    "type": "text/javascript",
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);",
+                      "pm.environment.set(\"registerToken\", jsonData.token);",
+                      "",
+                      "pm.test(\"response is ok\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"cellphone\");",
+                      "    pm.response.to.have.jsonBody('token');",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\"cellphone\":\"8611111111\",\n\"password\":\"pwd11111\"\n}"
+                },
+                "url": "{{base_url}}/api/users/register"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "1b748ade-f937-4353-9eeb-1f6770d7c799",
+              "name": "register:cellphone:confirmcode",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "dc8c4fc3-af07-4112-bf2f-a2e52deb3738",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"response is ok\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"message\",\"Registration success\");",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "JWT {{registerToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"code\":\"111111\"}"
+                },
+                "url": "{{base_url}}/api/users/register/confirmcode"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "d9295d28-bdb4-431d-81fd-3e9218eb524e",
+              "name": "register:cellphone:confirmcode (code used)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "aa412552-d76a-428a-9f93-e3ea32d8b3f0",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"response is 400\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "pm.test(\"response is error object\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"error_code\");",
+                      "    pm.response.to.have.jsonBody(\"error_text\");",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "JWT {{registerToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"code\":\"000000\"}"
+                },
+                "url": "{{base_url}}/api/users/register/confirmcode"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "1d50df93-dc0c-456f-96a1-762c984db871",
+              "name": "register:cellphone (phone exist)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "f8d9fdfb-b094-43c9-8373-351c2e78c14c",
+                    "type": "text/javascript",
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);",
+                      "pm.environment.set(\"registerToken\", jsonData.token);",
+                      "",
+                      "pm.test(\"response is 400\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "pm.test(\"response data is error object\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"error_code\");",
+                      "    pm.response.to.have.jsonBody('error_text','user exist');",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\"cellphone\":\"8690000000000\",\n\"password\":\"pwd11111\"\n}"
+                },
+                "url": "{{base_url}}/api/users/register"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "e4513d72-f9d9-4ab6-bc9f-c7bbf2c8e4a6",
+              "name": "register:email",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "0ee37812-6869-491b-a69f-507c2cc854e8",
+                    "type": "text/javascript",
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);",
+                      "pm.environment.set(\"registerToken\", jsonData.token);",
+                      "",
+                      "pm.test(\"response is ok\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"email\");",
+                      "    pm.response.to.have.jsonBody('token');",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\"email\":\"test@test.com\",\n\"password\":\"pwd000000\"\n}"
+                },
+                "url": "{{base_url}}/api/users/register"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "33a7c756-82ad-4acf-b782-24e3f2ca690a",
+              "name": "register:email:confirmcode",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "dc8c4fc3-af07-4112-bf2f-a2e52deb3738",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"response is ok\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"message\",\"Registration success\");",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "JWT {{registerToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"code\":\"000000\"}"
+                },
+                "url": "{{base_url}}/api/users/register/confirmcode"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "8dceac15-8ce7-4cf1-8c93-bb51b8add60c",
+              "name": "register:email:confirmcode (code used)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "32a92efc-52f6-4dfb-a388-b6f3f6addda0",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"response is 400\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "pm.test(\"response is error object\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"error_code\");",
+                      "    pm.response.to.have.jsonBody(\"error_text\");",
+                      "});",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "JWT {{registerToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"code\":\"000000\"}"
+                },
+                "url": "{{base_url}}/api/users/register/confirmcode"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "4aaa62a5-2841-4d93-aca7-edbe194f50f7",
+              "name": "register:email (email exist)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "9068bb25-b87b-4662-8978-3fc6571c4da8",
+                    "type": "text/javascript",
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);",
+                      "pm.environment.set(\"registerToken\", jsonData.token);",
+                      "",
+                      "pm.test(\"response is 400\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "pm.test(\"response data is error object\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"error_code\");",
+                      "    pm.response.to.have.jsonBody('error_text','user exist');",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\"email\":\"test_exist@test.com\",\n\"password\":\"pwd000000\"\n}"
+                },
+                "url": "{{base_url}}/api/users/register"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "df52dc85-2454-4c3e-b2c4-408a6b019944",
+              "name": "passreset:user not exist",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "1ee89705-b3ec-495f-b9ca-b1b7c49e52c2",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"response is 400\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "pm.test(\"response data is error object\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"error_code\");",
+                      "    pm.response.to.have.jsonBody('error_text','user not exist');",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"cellphone\":\"8699999999999\"}"
+                },
+                "url": "{{base_url}}/api/users/password/reset/code"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "38346927-89c4-454d-93d9-92cce59a4518",
+              "name": "passreset: send temppass to phone/email (user has only one verified phone or email)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "669baae4-71d3-4eae-9c79-359ecde02020",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"response is ok\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"type\",\"temp_password\");",
+                      "    pm.response.to.have.jsonBody('cellphone');",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"cellphone\":\"8680000000000\"}"
+                },
+                "url": "{{base_url}}/api/users/password/reset/code"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "b1eecbf7-199b-41db-a868-099300d592c2",
+              "name": "passreset: send code to phone",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "ae30ec3e-dced-4137-902a-4a57a6001ab7",
+                    "type": "text/javascript",
+                    "exec": [
+                      "var jsonData = JSON.parse(responseBody);",
+                      "pm.environment.set(\"passResetToken\", jsonData.token);",
+                      "",
+                      "pm.test(\"response is ok\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"type\",\"verify_code\");",
+                      "    pm.response.to.have.jsonBody('cellphone');",
+                      "     pm.response.to.have.jsonBody('token');",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"cellphone\":\"8690000000000\"}"
+                },
+                "url": "{{base_url}}/api/users/password/reset/code"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "9ee8a6f5-cb09-47b7-bf29-da4659e02d71",
+              "name": "passreset:verify code to exchange temp pass",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "9da2cef3-87f6-4b51-bc1e-e67f1b954992",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"response is ok\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "    pm.response.to.have.jsonBody(\"message\",\"email sent out\");",
+                      "    pm.response.to.have.jsonBody('email');",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "JWT {{passResetToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"code\":\"932356\"}"
+                },
+                "url": "{{base_url}}/api/users/password/reset/temp"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "caa4e91b-d83e-4d0c-beba-6553f4930694",
+              "name": "passreset:change pass",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "7b429d4d-3454-4b2f-b321-68fd54508229",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"response is okay\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "pm.test(\"response data valid\",()=>{",
+                      "        pm.response.to.have.jsonBody('message','password reset success');",
+                      "});",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"cellphone\":\"8690000000000\",\n  \"temp_password\":\"testonly#pass\",\n  \"new_password\":\"pwd11111\"\n}"
+                },
+                "url": "{{base_url}}/api/users/password/reset"
+              },
+              "response": []
+            },
+            {
+              "_postman_id": "db9d7678-5fd9-40c6-ae3c-0876ea4b698a",
+              "name": "passreset:temp pass used",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "531ca402-0585-4689-bc77-77b79f2a4cc0",
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"response is 400\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "pm.test(\"response data is error object\",()=>{",
+                      "        pm.response.to.have.jsonBody('error_text','temporary password invalid');",
+                      "        pm.response.to.have.jsonBody('error_code');",
+                      "})",
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"cellphone\":\"8690000000000\",\n  \"temp_password\":\"testonly#pass\",\n  \"new_password\":\"pwd222222\"\n}"
+                },
+                "url": "{{base_url}}/api/users/password/reset"
+              },
+              "response": []
+            }
+          ],
+          "_postman_isSubFolder": true
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "b88728d3-1739-4493-b219-8009718277c6",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "cb83797f-f051-446a-8c08-b8a6e4f45249",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "2486d8e7-da09-49fb-b09d-28ee59d63436",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "45cda187-1a7f-4538-9fc1-1c72c33577cd",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
