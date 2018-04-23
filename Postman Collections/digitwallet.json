@@ -931,7 +931,7 @@
               "mode": "raw",
               "raw": "{\n\t\"code\":\"389958\",\n\t\"usage\":\"Login\"\n}"
             },
-            "url": "http://localhost:3000/api/settings/tfa/change/confirm"
+            "url": "{{base_url}}/api/settings/tfa/change/confirm"
           },
           "response": []
         },
