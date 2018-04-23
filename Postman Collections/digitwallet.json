@@ -662,7 +662,7 @@
               "mode": "raw",
               "raw": "{\n  \"address\":\"2N4qsrN2AtAmcJwbCFt6VMvYRf2nvnCE411\",\n  \"amount\":10000,\n  \"currency\":\"BTC\"\n}"
             },
-            "url": "http://localhost:3000/api/trans/invoice"
+            "url": "{{base_url}}/api/trans/invoice"
           },
           "response": []
         },
