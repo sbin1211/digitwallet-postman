@@ -47,6 +47,44 @@
             "url": "{{base_url}}/api/test/resetdb"
           },
           "response": []
+        },
+        {
+          "_postman_id": "1b63ba78-0d60-48be-8633-fd9921533fa8",
+          "name": "db:init Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "157ad7bb-a683-49aa-8ea6-c92be72ce05a",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"db reset success\",  () =>{",
+                  "    let code = pm.response.code;",
+                  "    if(code!=200)",
+                  "    {",
+                  "        postman.setNextRequest(null);",
+                  "    }",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "{{base_url}}/api/test/resetdb"
+          },
+          "response": []
         }
       ]
     },
