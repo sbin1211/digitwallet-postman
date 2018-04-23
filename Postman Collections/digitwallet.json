@@ -488,7 +488,7 @@
               "mode": "raw",
               "raw": "{\n  \"account_id\":161,\n  \"account_name\":\"Primary ARS 02\",\n  \"is_default\":true\n}"
             },
-            "url": "http://localhost:3000/api/account/update"
+            "url": "{{base_url}}/api/account/update"
           },
           "response": []
         },
