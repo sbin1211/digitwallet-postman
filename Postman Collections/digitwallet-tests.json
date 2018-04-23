@@ -144,10 +144,9 @@
                 {
                   "listen": "test",
                   "script": {
-                    "id": "3aa486db-903e-4753-8e88-f4df0ad3d451",
+                    "id": "bf214677-d61c-47bd-9a5b-a30980035698",
                     "type": "text/javascript",
                     "exec": [
-                      "console.log('requeist');",
                       "pm.test(\"response is 400\", function () {",
                       "    pm.response.to.have.status(400);",
                       "});",
