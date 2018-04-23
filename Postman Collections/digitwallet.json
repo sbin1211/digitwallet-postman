@@ -639,7 +639,7 @@
               "mode": "raw",
               "raw": "{ \n  \"transaction_id\":\"15218819107070896\"\n}"
             },
-            "url": "http://localhost:3000/api/trans/deposit/fiat"
+            "url": "{{base_url}}/api/trans/deposit/fiat"
           },
           "response": []
         },
