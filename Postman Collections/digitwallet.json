@@ -838,7 +838,7 @@
               "mode": "raw",
               "raw": "{\n  \"account_from\":158,\n  \"account_to\":157,\n  \"amount_from\":100\n}"
             },
-            "url": "http://localhost:3000/api/exchange/create"
+            "url": "{{base_url}}/api/exchange/create"
           },
           "response": []
         },
