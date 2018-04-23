@@ -79,6 +79,36 @@
           },
           "response": []
         }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "fe84d18c-8309-4476-979a-97468dbcf2b5",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"postman env setup and api port start with 3400\",  () =>{",
+              "let baseUrl=pm.environment.get(\"base_url\");",
+              "if(!baseUrl||!baseUrl.endsWith('3400'))",
+              "{",
+              "    postman.setNextRequest(null);",
+              "}",
+              "pm.expect(baseUrl).to.include('3400');",
+              "});",
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "b176a792-be19-40b0-b556-445e785e3caf",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
       ]
     },
     {
