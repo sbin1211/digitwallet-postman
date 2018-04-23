@@ -385,7 +385,7 @@
               "mode": "raw",
               "raw": "{\n  \"bank_id\":9,\n  \"cbu\":\"1234567890123456789082\",\n  \"bank_branch\":\"cbd test\",\n  \"account_number\":\"2947281923\",\n  \"account_name\":\"shubin\",\n  \"branch_office\":\"shenzen\"\n}"
             },
-            "url": "http://localhost:3000/api/bank/update"
+            "url": "{{base_url}}/api/bank/update"
           },
           "response": []
         },
