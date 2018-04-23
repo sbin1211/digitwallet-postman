@@ -6,42 +6,6 @@
   },
   "item": [
     {
-      "_postman_id": "62e9d65f-18a2-41c6-a5b2-09e895615220",
-      "name": "pre-run-checking",
-      "description": "",
-      "item": [],
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "id": "d6ed8f2d-4230-4390-bfcb-cf0643473189",
-            "type": "text/javascript",
-            "exec": [
-              ""
-            ]
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "id": "fa341558-328f-496d-8618-fdc455ecb512",
-            "type": "text/javascript",
-            "exec": [
-              "pm.test(\"postman env setup and api port start with 3400\",  () =>{",
-              "let baseUrl=pm.environment.get(\"base_url\");",
-              "if(!baseUrl||!baseUrl.endsWith('3400'))",
-              "{",
-              "    postman.setNextRequest(null);",
-              "}",
-              "pm.expect(baseUrl).to.include('3400');",
-              "});",
-              ""
-            ]
-          }
-        }
-      ]
-    },
-    {
       "_postman_id": "2420551d-b2ea-43bf-a099-7a9d1c503fbb",
       "name": "init",
       "description": "",
