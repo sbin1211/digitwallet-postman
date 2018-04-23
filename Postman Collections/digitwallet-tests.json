@@ -34,7 +34,7 @@
             }
           ],
           "request": {
-            "method": "POST",
+            "method": "HEAD",
             "header": [
               {
                 "key": "Content-Type",
@@ -45,7 +45,7 @@
               "mode": "raw",
               "raw": ""
             },
-            "url": ""
+            "url": "localhost"
           },
           "response": []
         },
