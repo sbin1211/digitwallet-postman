@@ -1013,7 +1013,7 @@
         "type": "text/javascript",
         "exec": [
           "let baseUrl=pm.environment.get(\"base_url\");",
-          "if(!baseUrl||!baseUrl.endWith('3400'))",
+          "if(!baseUrl||!baseUrl.endsWith('3400'))",
           "{",
           "    postman.setNextRequest(null);",
           "   console.error('url is not valid for test')",
