@@ -172,7 +172,7 @@
               "mode": "raw",
               "raw": "{\n      \"cellphone\":\"8618033440503\",\n      \"password\":\"pwd11111\"\n      }"
             },
-            "url": "http://localhost:3000/api/users/auth"
+            "url": "{{base_url}}/api/users/auth"
           },
           "response": []
         },
