@@ -1023,6 +1023,14 @@
         "id": "45cda187-1a7f-4538-9fc1-1c72c33577cd",
         "type": "text/javascript",
         "exec": [
+          "pm.test('valid url',()=>{",
+          "   let baseUrl=pm.environment.get(\"base_url\");",
+          "if(!baseUrl||!baseUrl.endWith('3400'))",
+          "{",
+          "    return false;",
+          "} ",
+          "return true;",
+          "});",
           ""
         ]
       }
