@@ -442,7 +442,7 @@
               }
             ],
             "body": {},
-            "url": "http://localhost:3000/api/account/query"
+            "url": "{{base_url}}/api/account/query"
           },
           "response": []
         },
