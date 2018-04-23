@@ -602,7 +602,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{ \n  \"network\":\"Banelco\",\n  \"currency\":\"ARS\",\n  \"account_id\":159,\n  \"bank_id\":10,\n  \"amount\":100\n}"
+              "raw": "{ \n  \"account_id\":159,\n  \"bank_id\":10,\n  \"amount\":100\n}"
             },
             "url": "{{base_url}}/api/trans/deposit/fiat"
           },
