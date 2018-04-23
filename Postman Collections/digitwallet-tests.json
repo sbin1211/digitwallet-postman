@@ -17,16 +17,18 @@
             {
               "listen": "test",
               "script": {
-                "id": "157ad7bb-a683-49aa-8ea6-c92be72ce05a",
+                "id": "87f4054c-b8fa-45a2-bd87-b043bf875b07",
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"db reset success\",  () =>{",
-                  "    let code = pm.response.code;",
-                  "    if(code!=200)",
-                  "    {",
-                  "        postman.setNextRequest(null);",
-                  "    }",
-                  "    pm.response.to.have.status(200);",
+                  "pm.test(\"url port start with 3400\",  () =>{",
+                  "let baseUrl=pm.environment.get(\"base_url\");",
+                  "if(!baseUrl||!baseUrl.endsWith('3400'))",
+                  "{",
+                  "    postman.setNextRequest(null);",
+                  "   throw new Error('invalid url (port not start with 3400)');",
+                  "} ",
+                  "",
+                  "",
                   "});"
                 ]
               }
