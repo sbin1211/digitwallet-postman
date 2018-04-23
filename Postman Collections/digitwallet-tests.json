@@ -1016,7 +1016,7 @@
           "if(!baseUrl||!baseUrl.endsWith('3400'))",
           "{",
           "    postman.setNextRequest(null);",
-          "   console.error('url is not valid for test')",
+          "   throw new Error('invalid url');",
           "} ",
           "",
           "",
