@@ -17,7 +17,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "9ec0afb0-bd41-4099-9945-06fed6d6ae3d",
+                "id": "6521203f-a70d-4a8f-9dda-bda7699a7f28",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"postman env setup and api port start with 3400\",  () =>{",
@@ -26,8 +26,9 @@
                   "{",
                   "    postman.setNextRequest(null);",
                   "}",
-                  "",
-                  "});"
+                  "pm.expect(baseUrl).to.include('3400');",
+                  "});",
+                  ""
                 ]
               }
             }
