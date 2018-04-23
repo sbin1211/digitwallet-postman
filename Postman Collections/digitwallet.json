@@ -791,7 +791,7 @@
               "mode": "raw",
               "raw": "{\n  \"account_id\":122\n}"
             },
-            "url": "http://localhost:3000/api/ccy/zec/tx/t2NzuQxzgQnbHZ5CPU4bjfJ36jvqDYhN1XN"
+            "url": "{{base_url}}/api/ccy/zec/tx/t2NzuQxzgQnbHZ5CPU4bjfJ36jvqDYhN1XN"
           },
           "response": []
         },
