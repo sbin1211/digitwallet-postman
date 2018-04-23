@@ -11,8 +11,8 @@
       "description": "",
       "item": [
         {
-          "_postman_id": "6c87a06a-9fdc-4917-b86e-947e806925ee",
-          "name": "db:init",
+          "_postman_id": "1b63ba78-0d60-48be-8633-fd9921533fa8",
+          "name": "env:url check",
           "event": [
             {
               "listen": "test",
@@ -49,8 +49,8 @@
           "response": []
         },
         {
-          "_postman_id": "1b63ba78-0d60-48be-8633-fd9921533fa8",
-          "name": "env:url check",
+          "_postman_id": "6c87a06a-9fdc-4917-b86e-947e806925ee",
+          "name": "db:init",
           "event": [
             {
               "listen": "test",
