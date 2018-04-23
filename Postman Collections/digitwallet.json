@@ -511,7 +511,7 @@
               "mode": "raw",
               "raw": "{ \n  \"amount\":30,\n  \"account_id\":159,\n  \"bank_id\":10\n}"
             },
-            "url": "http://localhost:3000/api/trans/withdrawal"
+            "url": "{{base_url}}/api/trans/withdrawal"
           },
           "response": []
         },
