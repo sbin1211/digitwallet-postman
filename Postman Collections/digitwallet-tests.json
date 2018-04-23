@@ -50,7 +50,7 @@
         },
         {
           "_postman_id": "1b63ba78-0d60-48be-8633-fd9921533fa8",
-          "name": "db:init Copy",
+          "name": "env:url check",
           "event": [
             {
               "listen": "test",
