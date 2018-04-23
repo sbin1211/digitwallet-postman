@@ -884,7 +884,7 @@
               "mode": "raw",
               "raw": "{\n\t\"account_from\":122,\n\t\"account_to\":123,\n\t\"amount\":100,\n\t\"type\":\"BUY\"\n}"
             },
-            "url": "http://localhost:3000/api/settings/query",
+            "url": "{{base_url}}/api/settings/query",
             "description": "query params: \n [from] | [to] |[currency_from]|[currency_to] |[type]"
           },
           "response": []
