@@ -11,37 +11,6 @@
       "description": "",
       "item": [
         {
-          "_postman_id": "1b63ba78-0d60-48be-8633-fd9921533fa8",
-          "name": "env:url check",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "779ab0b6-b4c9-4a96-8af3-9dc10fdc0962",
-                "type": "text/javascript",
-                "exec": [
-                  ""
-                ]
-              }
-            }
-          ],
-          "request": {
-            "method": "HEAD",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": ""
-            },
-            "url": "localhost"
-          },
-          "response": []
-        },
-        {
           "_postman_id": "6c87a06a-9fdc-4917-b86e-947e806925ee",
           "name": "db:init",
           "event": [
