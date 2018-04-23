@@ -316,7 +316,7 @@
               "mode": "raw",
               "raw": "[{\n  \"encrypted_photo\":\"\",\n  \"type\":\"ID_FRONT\"\n},\n{\n  \"encrypted_photo\":\"\",\n  \"type\":\"ID_FRONT\"\n}\n]"
             },
-            "url": "http://localhost:3000/api/pgp/pubkey"
+            "url": "{{base_url}}/api/pgp/pubkey"
           },
           "response": []
         },
