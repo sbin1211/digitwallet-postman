@@ -123,6 +123,29 @@
           "response": []
         },
         {
+          "_postman_id": "0644ab77-b317-45dd-8315-02230d67477c",
+          "name": "/api/users/password/reset/temp Copy",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{passResetToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"code\":\"932356\"}"
+            },
+            "url": "http://localhost:3000/api/users/password/reset/temp"
+          },
+          "response": []
+        },
+        {
           "_postman_id": "ba7c50d0-2969-462d-8129-cb52e023e85b",
           "name": "/api/users/password/reset",
           "request": {
@@ -976,29 +999,6 @@
               ]
             },
             "description": "query params: \n [from] | [to] |[currency_from]|[currency_to] |[type]"
-          },
-          "response": []
-        },
-        {
-          "_postman_id": "0644ab77-b317-45dd-8315-02230d67477c",
-          "name": "/api/users/password/reset/temp Copy",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "JWT {{passResetToken}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"code\":\"932356\"}"
-            },
-            "url": "http://localhost:3000/api/users/password/reset/temp"
           },
           "response": []
         }
