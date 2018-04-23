@@ -270,7 +270,7 @@
               "mode": "raw",
               "raw": "{\n  \"code\":\"212389\"\n}"
             },
-            "url": "http://localhost:3000/api/users/phonemail/verify"
+            "url": "{{base_url}}/api/users/phonemail/verify"
           },
           "response": []
         },
