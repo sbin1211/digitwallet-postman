@@ -17,7 +17,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "fd943d83-75f3-4fb4-a069-81f7aa8ff635",
+                "id": "9ec0afb0-bd41-4099-9945-06fed6d6ae3d",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"postman env setup and api port start with 3400\",  () =>{",
