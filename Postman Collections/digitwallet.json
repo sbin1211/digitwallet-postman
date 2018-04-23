@@ -604,7 +604,7 @@
               "mode": "raw",
               "raw": "{ \n  \"network\":\"Banelco\",\n  \"currency\":\"ARS\",\n  \"account_id\":159,\n  \"bank_id\":10,\n  \"amount\":100\n}"
             },
-            "url": "http://localhost:3000/api/trans/deposit/fiat"
+            "url": "{{base_url}}/api/trans/deposit/fiat"
           },
           "response": []
         },
