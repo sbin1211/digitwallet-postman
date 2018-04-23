@@ -45,7 +45,7 @@
               "mode": "raw",
               "raw": ""
             },
-            "url": "{{base_url}}/api/test/resetdb"
+            "url": ""
           },
           "response": []
         },
