@@ -569,7 +569,7 @@
               "mode": "raw",
               "raw": "{\n  \"code\": \"492564\",\n  \"tick\":15227342003500169\n}"
             },
-            "url": "http://localhost:3000/api/trans/withdrawal/confirmcode"
+            "url": "{{base_url}}/api/trans/withdrawal/confirmcode"
           },
           "response": []
         },
