@@ -768,7 +768,7 @@
               "mode": "raw",
               "raw": "{\n  \"account_id\":166,\n  \"force_new\":true\n}"
             },
-            "url": "http://localhost:3000/api/ccy/address/generate"
+            "url": "{{base_url}}/api/ccy/address/generate"
           },
           "response": []
         },
