@@ -546,7 +546,7 @@
               "mode": "raw",
               "raw": "{ \n  \"amount\":10000,\n  \"feerate\":6000,\n  \"address\":\"t2DR7oLV8NR5P99T2y8PVFXVUDirCFnoMKU\",\n  \"account_id\":166\n}"
             },
-            "url": "http://localhost:3000/api/trans/withdrawal"
+            "url": "{{base_url}}/api/trans/withdrawal"
           },
           "response": []
         },
