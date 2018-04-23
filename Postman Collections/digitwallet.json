@@ -683,12 +683,10 @@
             ],
             "body": {},
             "url": {
-              "raw": "http://localhost:3000/api/trans/query?type=all&from=20170102",
-              "protocol": "http",
+              "raw": "{{base_url}}/api/trans/query?type=all&from=20170102",
               "host": [
-                "localhost"
+                "{{base_url}}"
               ],
-              "port": "3000",
               "path": [
                 "api",
                 "trans",
