@@ -142,25 +142,6 @@
           "response": []
         },
         {
-          "_postman_id": "ceabfbcb-c148-412c-a499-eb0bbb9f72d3",
-          "name": "/api/users/password/reset Copy",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"cellphone\":\"8618033440503\",\n  \"temp_password\":\"YrBo9iK5tv\",\n  \"new_password\":\"pwd11111\"\n}"
-            },
-            "url": "http://localhost:3000/api/users/password/reset"
-          },
-          "response": []
-        },
-        {
           "_postman_id": "becb0620-0d08-427f-aadc-e5b41e0983a9",
           "name": "/api/users/auth",
           "event": [
