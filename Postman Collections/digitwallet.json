@@ -362,7 +362,7 @@
               "mode": "raw",
               "raw": "{\n  \"currency\":\"ARS\",\n  \"cbu\":\"1234567890123456789080\",\n  \"bank_branch\":\"cbd\",\n  \"account_number\":\"2947281923\",\n  \"account_name\":\"yuqing\",\n  \"branch_office\":\"shenzen\"\n}"
             },
-            "url": "http://localhost:3000/api/bank/create"
+            "url": "{{base_url}}/api/bank/create"
           },
           "response": []
         },
