@@ -1027,6 +1027,7 @@
           "   let baseUrl=pm.environment.get(\"base_url\");",
           "if(!baseUrl||!baseUrl.endWith('3400'))",
           "{",
+          "    postman.setNextRequest(null);",
           "    return false;",
           "} ",
           "return true;",
