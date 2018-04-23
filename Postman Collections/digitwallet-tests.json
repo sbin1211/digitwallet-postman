@@ -1016,7 +1016,7 @@
           "if(!baseUrl||!baseUrl.endsWith('3400'))",
           "{",
           "    postman.setNextRequest(null);",
-          "   throw new Error('invalid url');",
+          "   throw new Error('invalid url (port not start with 3400)');",
           "} ",
           "",
           "",
