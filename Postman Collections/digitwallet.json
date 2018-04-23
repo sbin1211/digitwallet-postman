@@ -293,7 +293,7 @@
               "mode": "raw",
               "raw": "{\n    \"photos\": [\n        {\n            \"encrypted_photo\": \"google\",\n            \"type\": \"ID_FRONT\"\n        },\n        {\n            \"encrypted_photo\": \"ss sf \",\n            \"type\": \"ID_BACK\"\n        },\n        {\n            \"encrypted_photo\": \"did \",\n            \"type\": \"RESIDENCE\"\n        }\n    ],\n    \"pgp_key_id\": 1\n}"
             },
-            "url": "http://localhost:3000/api/users/id/photos"
+            "url": "{{base_url}}/api/users/id/photos"
           },
           "response": []
         },
