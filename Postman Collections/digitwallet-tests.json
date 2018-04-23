@@ -12,6 +12,16 @@
       "item": [],
       "event": [
         {
+          "listen": "prerequest",
+          "script": {
+            "id": "d6ed8f2d-4230-4390-bfcb-cf0643473189",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
           "listen": "test",
           "script": {
             "id": "fa341558-328f-496d-8618-fdc455ecb512",
