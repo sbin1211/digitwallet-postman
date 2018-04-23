@@ -861,7 +861,7 @@
               "mode": "raw",
               "raw": "{\n  \"currency_from\":\"USD\",\n  \"currency_to\":\"BTC\"\n  \n}"
             },
-            "url": "http://localhost:3000/api/exchange/liverate"
+            "url": "{{base_url}}/api/exchange/liverate"
           },
           "response": []
         },
