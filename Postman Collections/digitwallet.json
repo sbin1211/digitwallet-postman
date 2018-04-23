@@ -204,7 +204,7 @@
               "mode": "raw",
               "raw": "{\n      \"cellphone\":\"8618033440503\",\n      \"code\":\"218837\"\n      }"
             },
-            "url": "http://localhost:3000/api/users/auth/confirm"
+            "url": "{{base_url}}/api/users/auth/confirm"
           },
           "response": []
         },
