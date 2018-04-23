@@ -247,7 +247,7 @@
               "mode": "raw",
               "raw": "{ \n      \"email\":\"shubin1211@outlook.com\",\n      \"cellphone\":\"8618033440503\"\n      }"
             },
-            "url": "http://localhost:3000/api/users/update"
+            "url": "{{base_url}}/api/users/update"
           },
           "response": []
         },
