@@ -177,41 +177,6 @@
           "response": []
         },
         {
-          "_postman_id": "b3d909f9-2fda-43da-ba51-f03332998700",
-          "name": "/api/users/auth Copy",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "cec97cb9-49e6-4b86-b2ed-f8f29dfe7067",
-                "type": "text/javascript",
-                "exec": [
-                  "var jsonData = JSON.parse(responseBody);",
-                  "pm.environment.set(\"authToken\", jsonData.token);",
-                  "pm.test('ok',()=>{",
-                  "     pm.response.to.have.status(200);",
-                  "});"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n      \"cellphone\":\"8618033440503\",\n      \"password\":\"pwd11111\"\n      }"
-            },
-            "url": "{{base_url}}/api/users/auth"
-          },
-          "response": []
-        },
-        {
           "_postman_id": "1c4727a9-a0b8-4798-82ee-d9b33b7f746d",
           "name": "/api/users/auth/confirm",
           "event": [
