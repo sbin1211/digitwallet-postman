@@ -17,7 +17,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "5a2773aa-d00f-476d-b169-2d6725136868",
+                "id": "157ad7bb-a683-49aa-8ea6-c92be72ce05a",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"db reset success\",  () =>{",
@@ -27,7 +27,6 @@
                   "        postman.setNextRequest(null);",
                   "    }",
                   "    pm.response.to.have.status(200);",
-                  "    ",
                   "});"
                 ]
               }
