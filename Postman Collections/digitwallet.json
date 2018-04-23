@@ -465,7 +465,7 @@
               "mode": "raw",
               "raw": "{\n  \"account_name\":\"Primary ZEC\",\n  \"currency\":\"ZEC\",\n  \"is_default\":true\n}"
             },
-            "url": "http://localhost:3000/api/account/create"
+            "url": "{{base_url}}/api/account/create"
           },
           "response": []
         },
