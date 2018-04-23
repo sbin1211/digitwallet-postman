@@ -408,7 +408,7 @@
               "mode": "raw",
               "raw": "{\n  \"bank_id\":8\n}"
             },
-            "url": "http://localhost:3000/api/bank/remove"
+            "url": "{{base_url}}/api/bank/remove"
           },
           "response": []
         },
