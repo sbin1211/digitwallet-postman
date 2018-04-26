@@ -1016,7 +1016,7 @@
           "item": [
             {
               "_postman_id": "965f0e9e-f1a4-456c-b1d5-051a2c893205",
-              "name": "/api/users/query Copy",
+              "name": "/api/users/query",
               "request": {
                 "method": "GET",
                 "header": [
