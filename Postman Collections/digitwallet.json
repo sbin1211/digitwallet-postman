@@ -972,6 +972,26 @@
             "description": "query params: \n [from] | [to] |[currency_from]|[currency_to] |[type]"
           },
           "response": []
+        },
+        {
+          "_postman_id": "5cd0e58b-4b57-498f-ad0d-fab8f58de8a5",
+          "name": "/api/users/query Copy",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "JWT {{authToken}}"
+              }
+            ],
+            "body": {},
+            "url": "{{base_url}}/api/users/query"
+          },
+          "response": []
         }
       ]
     },
