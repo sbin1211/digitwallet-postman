@@ -1021,7 +1021,7 @@
                 {
                   "listen": "prerequest",
                   "script": {
-                    "id": "b2e3fb18-3739-48de-9bee-b7e7078c1c36",
+                    "id": "28fe0a49-27a0-4fe9-994a-06c83aae2c52",
                     "type": "text/javascript",
                     "exec": [
                       "let url=pm.environment.get(\"base_url\");",
@@ -1035,7 +1035,7 @@
                       "    mode: 'raw',",
                       "    raw: JSON.stringify({",
                       "        cellphone: '8690000000000',",
-                      "        password:'000000'",
+                      "        password:'pwd000000'",
                       "    })",
                       "  }",
                       "};",
