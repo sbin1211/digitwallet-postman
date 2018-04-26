@@ -1017,6 +1017,47 @@
             {
               "_postman_id": "965f0e9e-f1a4-456c-b1d5-051a2c893205",
               "name": "/api/users/query",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "b2e3fb18-3739-48de-9bee-b7e7078c1c36",
+                    "type": "text/javascript",
+                    "exec": [
+                      "let url=pm.environment.get(\"base_url\");",
+                      "url=url+'/api/users/auth';",
+                      "",
+                      "const postRequest = {",
+                      "  url,",
+                      "  method: 'POST',",
+                      "  header: 'Content-Type:application/json',",
+                      "  body: {",
+                      "    mode: 'raw',",
+                      "    raw: JSON.stringify({",
+                      "        cellphone: '8690000000000',",
+                      "        password:'000000'",
+                      "    })",
+                      "  }",
+                      "};",
+                      "",
+                      "let i=3;",
+                      "const cbRequest=(err,res)=>{",
+                      "    if(i>=0)",
+                      "    {",
+                      "    i--;",
+                      "     pm.sendRequest(postRequest,cbRequest); ",
+                      "    }",
+                      "   ",
+                      "};",
+                      "",
+                      "pm.sendRequest(postRequest, cbRequest);",
+                      "",
+                      "",
+                      ""
+                    ]
+                  }
+                }
+              ],
               "request": {
                 "method": "GET",
                 "header": [
